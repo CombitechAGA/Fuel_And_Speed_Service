@@ -17,7 +17,7 @@ public class PublishThread extends Thread {
     @Override
     public void run(){
         try {
-            client.publish(topic,"You run at high speed and havbe a low battery level, perhaps you should slow down.".getBytes(),0,false);
+            client.publish(topic,"message;messageText:You run at high speed and havbe a low battery level, perhaps you should slow down.".getBytes(),0,false);
         } catch (MqttException e) {
             e.printStackTrace();
         }

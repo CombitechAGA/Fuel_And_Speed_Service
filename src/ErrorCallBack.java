@@ -32,17 +32,18 @@ public class ErrorCallBack implements MqttCallback{
         String message = mqttMessage.toString();
         String[] messageParts =message.split(";");
         String carID = messageParts[0];
-        Long currentTime = System.currentTimeMillis();
+//        Long currentTime = System.currentTimeMillis();
+        Long currentTime = Long.parseLong(messageParts[1]);
         if (topic.equals("telemetry/fuel")||topic.equals("telemetry/speed")) {
             if (topic.equals("telemetry/fuel")) {
-                float fuelLevel = Float.parseFloat(messageParts[1]);
+                float fuelLevel = Float.parseFloat(messageParts[2]);
                 if (!clientToInfo.containsKey(carID)) {
                     clientToInfo.put(carID, new SpeedAndFuelInfo());
                 }
                 clientToInfo.get(carID).setFuel(fuelLevel, currentTime);
 
             } else if (topic.equals("telemetry/speed")) {
-                float speed = Float.parseFloat(messageParts[1]);
+                float speed = Float.parseFloat(messageParts[2]);
                 if (!clientToInfo.containsKey(carID)) {
                     clientToInfo.put(carID, new SpeedAndFuelInfo());
                 }
